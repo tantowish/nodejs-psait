@@ -10,7 +10,7 @@ app.use(express.json())
 
 app.get('/', (req, res) => {
     res.json({
-        'Nama': "Tanto"
+        message: "Hello World"
     })
 })
 app.use(UserRoute)
