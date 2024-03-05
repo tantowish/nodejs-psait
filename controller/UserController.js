@@ -57,7 +57,6 @@ export const editUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
     const userId = parseInt(req.params.id)
-    console.log(userId)
     if (userId == NaN) {
         res.status(404).json({ error: 'User not found' })
     }

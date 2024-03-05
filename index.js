@@ -1,6 +1,7 @@
 import UserRoute from './routes/UserRoute.js'
 import express from 'express'
 import dotenv from 'dotenv';
+import PostRoute from './routes/PostRoute.js';
 dotenv.config();
 
 const app = express()
@@ -14,6 +15,7 @@ app.get('/', (req, res) => {
     })
 })
 app.use(UserRoute)
+app.use(PostRoute)
 
 app.listen(port, () => {
     console.log(`Server listening on port http://localhost:${port}`);
