@@ -10,9 +10,9 @@ CREATE TABLE `User` (
 
 -- CreateTable
 CREATE TABLE `Post` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `id` VARCHAR(191) NOT NULL,
     `title` VARCHAR(191) NOT NULL,
-    `content` VARCHAR(191) NULL,
+    `content` TEXT NOT NULL,
     `published` BOOLEAN NOT NULL DEFAULT false,
     `authorId` INTEGER NOT NULL,
 

@@ -10,7 +10,7 @@ export const getUsers = async (req, res) => {
 export const getUser = async (req, res) => {
     const userId = parseInt(req.params.id)
     if (userId == NaN) {
-        res.status(404).json({ error: 'User not found' })
+        return res.status(404).json({ message: 'User not found' })
     }
     const user = await prisma.user.findUnique({
         where: {
@@ -18,7 +18,7 @@ export const getUser = async (req, res) => {
         }
     })
     if (!user) {
-        return res.status(404).json({ error: 'User not found' });
+        return res.status(404).json({ message: 'User not found' });
     }
     res.status(200).json(user);
 }
@@ -32,8 +32,8 @@ export const createUser = async (req, res) => {
         })
     } catch (error) {
         console.error("Error creating user:", error);
-        res.status(500).json({
-            "message": "Gagal membuat user"
+        return res.status(400).json({
+            message: "Gagal membuat user"
         })
     }
 }
@@ -41,7 +41,7 @@ export const createUser = async (req, res) => {
 export const editUser = async (req, res) => {
     const userId = parseInt(req.params.id)
     if (userId == NaN) {
-        res.status(404).json({ error: 'User not found' })
+        res.status(404).json({ message: 'User not found' })
     }
     const user = await prisma.user.update({
         where: {
@@ -49,8 +49,11 @@ export const editUser = async (req, res) => {
         },
         data: req.body
     })
+    if(!user){
+        return res.status(404).json({ message: 'User not found' })
+    }
     res.status(200).json({
-        "message": "Berhasil mengubah user",
+        message: "Berhasil mengubah data",
         user
     })
 }
@@ -58,13 +61,16 @@ export const editUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     const userId = parseInt(req.params.id)
     if (userId == NaN) {
-        res.status(404).json({ error: 'User not found' })
+        return res.status(404).json({ message: 'User not found' })
     }
     const user = await prisma.user.delete({
         where: {
             id: userId
         }
     })
+    if(!user){
+        return res.status(404).json({ message: 'User not found' })
+    }
     res.status(200).json({
         "message": "Berhasil menghapus user",
         user
