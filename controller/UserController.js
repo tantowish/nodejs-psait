@@ -25,9 +25,10 @@ export const getUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
     try {
-        await prisma.user.create({ data: req.body })
+        const user = await prisma.user.create({ data: req.body })
         res.status(200).json({
-            "message": "Berhasil membuat user"
+            "message": "Berhasil membuat user",
+            user
         })
     } catch (error) {
         console.error("Error creating user:", error);
@@ -35,4 +36,38 @@ export const createUser = async (req, res) => {
             "message": "Gagal membuat user"
         })
     }
+}
+
+export const editUser = async (req, res) => {
+    const userId = parseInt(req.params.id)
+    if (userId == NaN) {
+        res.status(404).json({ error: 'User not found' })
+    }
+    const user = await prisma.user.update({
+        where: {
+            id: userId
+        },
+        data: req.body
+    })
+    res.status(200).json({
+        "message": "Berhasil mengubah user",
+        user
+    })
+}
+
+export const deleteUser = async (req, res) => {
+    const userId = parseInt(req.params.id)
+    console.log(userId)
+    if (userId == NaN) {
+        res.status(404).json({ error: 'User not found' })
+    }
+    const user = await prisma.user.delete({
+        where: {
+            id: userId
+        }
+    })
+    res.status(200).json({
+        "message": "Berhasil menghapus user",
+        user
+    })
 }
