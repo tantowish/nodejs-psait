@@ -4,7 +4,8 @@ import {
     getUser,
     createUser,
     editUser,
-    deleteUser
+    deleteUser,
+    getUserPosts
 } from '../controller/UserController.js'
 
 const router = express.Router()
@@ -18,5 +19,7 @@ router.post('/user', createUser)
 router.put('/user/:id', editUser)
 
 router.delete('/user/:id', deleteUser)
+
+router.get('/user/:id/posts', getUserPosts)
 
 export default router

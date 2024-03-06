@@ -49,7 +49,7 @@ export const editUser = async (req, res) => {
         },
         data: req.body
     })
-    if(!user){
+    if (!user) {
         return res.status(404).json({ message: 'User not found' })
     }
     res.status(200).json({
@@ -68,11 +68,30 @@ export const deleteUser = async (req, res) => {
             id: userId
         }
     })
-    if(!user){
+    if (!user) {
         return res.status(404).json({ message: 'User not found' })
     }
     res.status(200).json({
         "message": "Berhasil menghapus user",
         user
     })
+}
+
+export const getUserPosts = async (req, res) => {
+    const userId = parseInt(req.params.id)
+    if (userId == NaN) {
+        return res.status(404).json({ message: 'User not found' })
+    }
+    const posts = await prisma.user.findUnique({
+        where: {
+            id: userId
+        },
+        include: {
+            posts: true
+        }
+    })
+    if (!posts) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(posts);
 }
