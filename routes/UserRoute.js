@@ -10,16 +10,16 @@ import {
 
 const router = express.Router()
 
-router.get('/users', getUsers)
+router.get('/api/users', getUsers)
 
-router.get('/user/:id', getUser)
+router.get('/api/user/:id', getUser)
 
-router.post('/user', createUser)
+router.post('/api/user', createUser)
 
-router.put('/user/:id', editUser)
+router.put('/api/user/:id', editUser)
 
-router.delete('/user/:id', deleteUser)
+router.delete('/api/user/:id', deleteUser)
 
-router.get('/user/:id/posts', getUserPosts)
+router.get('/api/user/:id/posts', getUserPosts)
 
 export default router

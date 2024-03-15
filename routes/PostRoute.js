@@ -3,14 +3,14 @@ import { createPost, deletePost, editPost, getPost, getPosts } from "../controll
 
 const router = express.Router()
 
-router.get('/posts', getPosts)
+router.get('/api/posts', getPosts)
 
-router.get('/post/:id', getPost)
+router.get('/api/post/:id', getPost)
 
-router.post('/post', createPost)
+router.post('/api/post', createPost)
 
-router.put('/post/:id', editPost)
+router.put('/api/post/:id', editPost)
 
-router.delete('/post/:id', deletePost)
+router.delete('/api/post/:id', deletePost)
 
 export default router
