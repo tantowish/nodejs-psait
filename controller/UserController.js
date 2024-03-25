@@ -63,11 +63,19 @@ export const deleteUser = async (req, res) => {
     if (userId == NaN) {
         return res.status(404).json({ message: 'User not found' })
     }
+
+    await prisma.post.deleteMany({
+        where: {
+            authorId: userId
+        }
+    })
+
     const user = await prisma.user.delete({
         where: {
             id: userId
         }
     })
+
     if (!user) {
         return res.status(404).json({ message: 'User not found' })
     }
